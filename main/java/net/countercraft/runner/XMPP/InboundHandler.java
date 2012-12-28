@@ -10,6 +10,7 @@ import net.countercraft.runner.Controller;
 
 //Bukkit Imports
 import org.bukkit.World;
+import org.bukkit.Bukkit;
 
 //Jivesoftware Imports
 import org.jivesoftware.smack.Chat;
@@ -126,7 +127,13 @@ public class InboundHandler implements MessageListener{
                             }
                      }
                
-                }else{
+                }else if (args[0].equalsIgnoreCase("who")){
+					String msg = "";
+					for (Player p : Bukkit.getOnlinePlayers()) {
+						msg += p.getDisplayName() + " ";
+					}
+					chat.sendMessage(msg);
+				}else{
                 //else execute normally
                    Controller.sendCommandAsConsole(commandAll);
                 }
