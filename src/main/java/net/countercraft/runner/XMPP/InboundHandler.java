@@ -11,6 +11,7 @@ import net.countercraft.runner.Controller;
 //Bukkit Imports
 import org.bukkit.World;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 //Jivesoftware Imports
 import org.jivesoftware.smack.Chat;
@@ -128,11 +129,15 @@ public class InboundHandler implements MessageListener{
                      }
                
                 }else if (args[0].equalsIgnoreCase("who")){
-					String msg = "";
+					String who = "";
 					for (Player p : Bukkit.getOnlinePlayers()) {
-						msg += p.getDisplayName() + " ";
+						who += p.getDisplayName() + " ";
 					}
-					chat.sendMessage(msg);
+					try {
+						chat.sendMessage(who);
+					} catch (XMPPException ex) {
+						Logger.getLogger(InboundHandler.class.getName()).log(Level.SEVERE, null, ex);
+					}
 				}else{
                 //else execute normally
                    Controller.sendCommandAsConsole(commandAll);
