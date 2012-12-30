@@ -6,11 +6,13 @@ import java.util.logging.Logger;
 
 //Local Imports
 import net.countercraft.runner.Controller;
+import net.countercraft.runner.senders.RunnerSender;
 import net.countercraft.runner.util.TimeParser;
 
 //Bukkit Imports
 import org.bukkit.World;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 //Jivesoftware Imports
@@ -220,9 +222,14 @@ public class InboundHandler implements MessageListener {
 				} else {
 					// else execute normally
 					try {
-						chat.sendMessage((Controller
-								.sendCommandAsConsoleWithResult(commandAll)) ? "Command executed"
-								: "Command not found");
+						CommandSender sender = new RunnerSender(
+								chat.getParticipant(),
+								Controller.getSettings().ADMIN_LIST.get(chat
+										.getParticipant()),
+								Controller.getSettings().USE_ADMIN_NAMES);
+						chat.sendMessage((Controller.getPluginServer()
+								.dispatchCommand(sender, commandAll)) ? ""
+								: "Command was not found");
 					} catch (XMPPException ex) {
 						Logger.getLogger(InboundHandler.class.getName()).log(
 								Level.SEVERE, null, ex);
@@ -238,20 +245,68 @@ public class InboundHandler implements MessageListener {
 				}
 			}
 
+		} else if (messageBody.trim().equalsIgnoreCase("/leave")) {
+			try {
+				chat.sendMessage("You have left the chatroom");
+			} catch (Exception ex) {
+				Logger.getLogger(InboundHandler.class.getName()).log(
+						Level.SEVERE, null, ex);
+			}
+			Controller.getXMPPManager().removeFromConnectionList(
+					chat.getParticipant());
 		} else {
-			// This is a message
-			Controller.getPluginServer().broadcastMessage(
-					"[Runner Internet Chat] "
-							+ Controller.getXMPPManager().correctAdress(
-									chat.getParticipant()) + " : "
-							+ messageBody);
-			Controller.getXMPPManager().sendAllExcept(
-					"[Internet Chat] "
-							+ Controller.getXMPPManager().correctAdress(
-									chat.getParticipant()) + " : "
-							+ messageBody, chat.getParticipant());
+			if (Controller.getSettings().ADMIN_LIST.containsKey(chat.getParticipant())) {
+				Controller.getPluginServer().broadcastMessage(
+						"[Runner Internet Chat] "
+								+ Controller.getSettings().ADMIN_LIST
+										.get(Controller.getXMPPManager()
+												.correctAdress(
+														chat.getParticipant()))
+								+ " : " + messageBody);
+				Controller
+						.getXMPPManager()
+						.sendAllExcept(
+								"[Internet Chat] "
+										+ Controller.getSettings().ADMIN_LIST.get(Controller
+												.getXMPPManager().correctAdress(
+														chat.getParticipant()))
+										+ " : " + messageBody,
+								chat.getParticipant());
+			} else if (Controller.getSettings().USER_LIST.containsKey(chat.getParticipant())) {
+				Controller.getPluginServer().broadcastMessage(
+						"[Runner Internet Chat] "
+								+ Controller.getSettings().USER_LIST
+										.get(Controller.getXMPPManager()
+												.correctAdress(
+														chat.getParticipant()))
+								+ " : " + messageBody);
+				Controller
+						.getXMPPManager()
+						.sendAllExcept(
+								"[Internet Chat] "
+										+ Controller.getSettings().USER_LIST.get(Controller
+												.getXMPPManager().correctAdress(
+														chat.getParticipant()))
+										+ " : " + messageBody,
+								chat.getParticipant());
+			} else {
+				Controller.getPluginServer().broadcastMessage(
+						"[Runner Internet Chat] "
+								+ Controller.getXMPPManager()
+												.correctAdress(
+														chat.getParticipant())
+								+ " : " + messageBody);
+				Controller
+						.getXMPPManager()
+						.sendAllExcept(
+								"[Internet Chat] "
+										+ Controller
+												.getXMPPManager().correctAdress(
+														chat.getParticipant())
+										+ " : " + messageBody,
+								chat.getParticipant());
+			}
 
 		}
 	}
-
 }

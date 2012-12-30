@@ -51,19 +51,19 @@ public class XMPPManager {
 			String password = Controller.getSettings().PASSWORD;
 			connection.login(user, password);
 			chatManager = connection.getChatManager();
-			for (String name : Controller.getSettings().ADMIN_LIST) {
+			for (Object name : Controller.getSettings().ADMIN_LIST.keySet().toArray()) {
 
-				createAndAddToChat(name);
-				chat(name).sendMessage(
+				createAndAddToChat(name.toString());
+				chat(name.toString()).sendMessage(
 						"Runner has activated on server : "
 								+ Controller.getPluginInstance().getServer()
 										.getServerName());
 
 			}
 
-			for (String name : Controller.getSettings().USER_LIST) {
-				createAndAddToChat(name);
-				chat(name).sendMessage(
+			for (Object name : Controller.getSettings().USER_LIST.keySet().toArray()) {
+				createAndAddToChat(name.toString());
+				chat(name.toString()).sendMessage(
 						"Runner has activated on server : "
 								+ Controller.getPluginInstance().getServer()
 										.getServerName());
@@ -161,6 +161,19 @@ public class XMPPManager {
 			}
 		}
 	}
+	
+	public void sendToOne(String message, String receiver) {
+		for (Chat c : connectionList) {
+			if (c.getParticipant().equalsIgnoreCase(receiver)) {
+				try {
+					c.sendMessage(message);
+				} catch (XMPPException ex) {
+					Logger.getLogger(XMPPManager.class.getName()).log(
+							Level.SEVERE, null, ex);
+				}
+			}
+		}
+	}
 
 	public void sendAllExcept(String message, String exceptionName) {
 		for (Chat c : connectionList) {
@@ -177,9 +190,9 @@ public class XMPPManager {
 
 	public void sendToAdmins(String message) {
 
-		for (String s : Controller.getSettings().ADMIN_LIST) {
+		for (Object s : Controller.getSettings().ADMIN_LIST.keySet().toArray()) {
 			try {
-				chat(s).sendMessage("[Admin Priority Message] " + message);
+				chat(s.toString()).sendMessage("[Admin Priority Message] " + message);
 			} catch (XMPPException ex) {
 				Logger.getLogger(XMPPManager.class.getName()).log(Level.SEVERE,
 						null, ex);
@@ -207,13 +220,13 @@ public class XMPPManager {
 	}
 
 	public void close() throws XMPPException {
-		for (String name : Controller.getSettings().ADMIN_LIST) {
-			chat(name)
+		for (Object name : Controller.getSettings().ADMIN_LIST.keySet().toArray()) {
+			chat(name.toString())
 					.sendMessage("Runner remote console is now closing down.");
 		}
 
-		for (String name : Controller.getSettings().USER_LIST) {
-			chat(name).sendMessage("Runner remote chat is now closing down.");
+		for (Object name : Controller.getSettings().USER_LIST.keySet().toArray()) {
+			chat(name.toString()).sendMessage("Runner remote chat is now closing down.");
 		}
 
 		connection.disconnect();

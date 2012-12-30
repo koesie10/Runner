@@ -8,9 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,10 +54,10 @@ public class Config {
 		dataChain.put("password", password);
 
 		// Admin List
-		List<String> adminList = new ArrayList<String>();
-		adminList.add("admin@gmail.com");
-		adminList.add("webadmin@countercraft.net");
-		adminList.add("alex@countercraft.net");
+		HashMap<String, String> adminList = new HashMap<String, String>();
+		adminList.put("admin@gmail.com", "Admin");
+		adminList.put("webadmin@countercraft.net", "Webadmin");
+		adminList.put("alex@countercraft.net", "alex");
 		dataChain.put("admins", adminList);
 
 		// Open Channel Mode
@@ -67,14 +65,17 @@ public class Config {
 		dataChain.put("openChannel", openChannel);
 
 		// User List
-		List<String> userList = new ArrayList<String>();
-		userList.add("normalGuy@gmail.com");
-		userList.add("test@googleAppServices.com");
+		HashMap<String, String> userList = new HashMap<String, String>();
+		userList.put("normalGuy@gmail.com", "Normal guy");
+		userList.put("test@googleAppServices.com", "Test");
 		dataChain.put("users", userList);
 
 		// Admin Transmissions
 		boolean adminInfo = false;
 		dataChain.put("admin_info", adminInfo);
+
+		boolean useAdminNames = false;
+		dataChain.put("admin_names", useAdminNames);
 	}
 
 	public void loadConfig() {
@@ -98,12 +99,14 @@ public class Config {
 					.get("password");
 			Controller.getSettings().OPEN_CHANNEL = (Boolean) informationRoot
 					.get("openChannel");
-			Controller.getSettings().ADMIN_LIST = (List<String>) informationRoot
+			Controller.getSettings().ADMIN_LIST = (HashMap<String, String>) informationRoot
 					.get("admins");
-			Controller.getSettings().USER_LIST = (List<String>) informationRoot
+			Controller.getSettings().USER_LIST = (HashMap<String, String>) informationRoot
 					.get("users");
 			Controller.getSettings().ADMIN_INFO_ENABLED = (Boolean) informationRoot
 					.get("admin_info");
+			Controller.getSettings().USE_ADMIN_NAMES = (Boolean) informationRoot
+					.get("admin_names");
 		}
 
 	}

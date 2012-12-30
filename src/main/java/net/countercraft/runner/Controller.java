@@ -13,6 +13,9 @@ import net.countercraft.runner.managers.XMPPManager;
 import org.bukkit.Server;
 import org.bukkit.plugin.PluginManager;
 
+//Vault Imports
+import net.milkbowl.vault.permission.Permission;
+
 public class Controller {
 
 	public static Runner getPluginInstance() {
@@ -59,5 +62,13 @@ public class Controller {
 	public static boolean sendCommandAsConsoleWithResult(String command) {
 		return getPluginServer().dispatchCommand(
 				getPluginServer().getConsoleSender(), command);
+	}
+	
+	public static boolean isVaultInstalled() {
+		return Runner.isVaultInstalled();
+	}
+	
+	public static Permission getPermission() {
+		return Runner.getPermission();
 	}
 }

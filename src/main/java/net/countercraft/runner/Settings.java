@@ -2,7 +2,6 @@ package net.countercraft.runner;
 
 //Java Imports
 import java.util.HashMap;
-import java.util.List;
 
 //Bukkit Imports
 import org.bukkit.World;
@@ -11,10 +10,11 @@ public class Settings {
 	public boolean OPEN_CHANNEL;
 	public String USERNAME;
 	public String PASSWORD;
-	public List<String> ADMIN_LIST;
-	public List<String> USER_LIST;
+	public HashMap<String, String> ADMIN_LIST;
+	public HashMap<String, String> USER_LIST;
 	private HashMap<String, String> ADMIN_WORLD_LIST;
 	public boolean ADMIN_INFO_ENABLED;
+	public boolean USE_ADMIN_NAMES;
 
 	private Settings() {
 	}
@@ -24,13 +24,7 @@ public class Settings {
 	}
 
 	public boolean isAdmin(String name) {
-		for (String s : ADMIN_LIST) {
-			if (s.equalsIgnoreCase(name)) {
-				return true;
-			}
-		}
-
-		return false;
+		return ADMIN_LIST.containsKey(name);
 	}
 
 	public World getWorldForAdmin(String name) {
@@ -48,14 +42,8 @@ public class Settings {
 		if (isAdmin(name)) {
 			return true;
 		} else {
-			for (String s : USER_LIST) {
-				if (s.equalsIgnoreCase(name)) {
-					return true;
-				}
-			}
+			return USER_LIST.containsKey(name);
 		}
-
-		return false;
 	}
 
 	private static class SettingsHolder {

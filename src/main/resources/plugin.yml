@@ -1,8 +1,22 @@
-author: AJCStriker
-database: false
-description: ' A free, lightweight and open source GTalk connector for a bukkit server.'
 main: net.countercraft.runner.Runner
-name: Runner
+name: ${project.name}
+version: ${project.version}
+authors: [AJCStriker, koesie10]
+database: false
+description: ${project.description}
 startup: postworld
-url: http://countercraft.net/
-version: '2.1 R'
+url: ${project.url}
+softdepend: [Vault]
+commands:
+  reloadrunner:
+    description: Reload Runner configuration file from disk
+    permission: runner.reload
+    usage: /<command>
+permissions:
+  runner.*:
+    description: Gives access to all Runner related commands
+    children:
+      runner.reload: true
+  runner.reload:
+    description: Reload Runner configuration file from disk
+    default: op
