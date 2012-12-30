@@ -7,8 +7,10 @@ import java.io.File;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jivesoftware.smack.XMPPException;
 
 //Vault Imports
+import net.countercraft.runner.commands.RunnerCommandExecutor;
 import net.milkbowl.vault.permission.Permission;
 
 public class Runner extends JavaPlugin {
@@ -35,6 +37,12 @@ public class Runner extends JavaPlugin {
 				.getXMPPManager()
 				.sendAll(
 						"Server is now shutting down. You will be disconnected from the chat.");
+		try {
+			Controller.getXMPPManager().close();
+		} catch (XMPPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("[" + this.toString() + "] is now disabled!");
 	}
 
@@ -48,8 +56,13 @@ public class Runner extends JavaPlugin {
 		Controller.getConfig().loadConfig();
 
 		Controller.getEventManager().registerEvents();
-
-		Controller.getXMPPManager().connect();
+		try {
+			Controller.getXMPPManager().connect();
+		} catch (Exception e) {
+			// Do nothing here
+		}
+		
+		getCommand("reloadrunner").setExecutor(new RunnerCommandExecutor());
 
 		vaultInstalled = Bukkit.getPluginManager().getPlugin("Vault") != null;
 		if (vaultInstalled) {
@@ -62,12 +75,12 @@ public class Runner extends JavaPlugin {
 								+ "] You have enabled admin_names, but Vault is not installed. This setting will thus not work");
 			}
 		}
-		System.out.println("[" + this.toString() + "] is Enabled.");
+		System.out.println("[" + this.toString() + "] is now enabled.");
 
 	}
 
 	public String getVersion() {
-		return "V 2.1 Release";
+		return this.getDescription().getVersion();
 	}
 
 	private boolean setupPermissions() {
@@ -79,6 +92,11 @@ public class Runner extends JavaPlugin {
 
 	public static boolean isVaultInstalled() {
 		return vaultInstalled;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getDescription().getName();
 	}
 
 }

@@ -1,6 +1,5 @@
 package net.countercraft.runner.managers;
 
-//Java Imports
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -110,7 +109,6 @@ public class XMPPManager {
 
 		} catch (XMPPException ex) {
 			System.out.println("Failure to connect : " + ex.getMessage());
-
 		}
 	}
 

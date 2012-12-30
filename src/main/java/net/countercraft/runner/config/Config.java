@@ -82,32 +82,33 @@ public class Config {
 
 		File config = new File(Controller.getDataFolder(), "config.yml");
 		boolean exists = Controller.getFileManager().makeIfNotExistFile(config);
-
+		Map informationRoot;
+		
 		if (!exists) {
 			createConfig(config);
+			informationRoot = dataChain;
 			System.out
 					.println("["
 							+ Controller.getPluginInstance().toString()
-							+ "] will now shut down as a new config file has been created.");
-			Controller.getPluginInstance().getServer().shutdown();
+							+ "] You can now change the config file and execute /reloadrunner when finished.");
 		} else {
-			Map informationRoot = parseFile(config);
-
-			Controller.getSettings().USERNAME = (String) informationRoot
-					.get("username");
-			Controller.getSettings().PASSWORD = (String) informationRoot
-					.get("password");
-			Controller.getSettings().OPEN_CHANNEL = (Boolean) informationRoot
-					.get("openChannel");
-			Controller.getSettings().ADMIN_LIST = (HashMap<String, String>) informationRoot
-					.get("admins");
-			Controller.getSettings().USER_LIST = (HashMap<String, String>) informationRoot
-					.get("users");
-			Controller.getSettings().ADMIN_INFO_ENABLED = (Boolean) informationRoot
-					.get("admin_info");
-			Controller.getSettings().USE_ADMIN_NAMES = (Boolean) informationRoot
-					.get("admin_names");
+			informationRoot = parseFile(config);
 		}
+		
+		Controller.getSettings().USERNAME = (String) informationRoot
+				.get("username");
+		Controller.getSettings().PASSWORD = (String) informationRoot
+				.get("password");
+		Controller.getSettings().OPEN_CHANNEL = (Boolean) informationRoot
+				.get("openChannel");
+		Controller.getSettings().ADMIN_LIST = (HashMap<String, String>) informationRoot
+				.get("admins");
+		Controller.getSettings().USER_LIST = (HashMap<String, String>) informationRoot
+				.get("users");
+		Controller.getSettings().ADMIN_INFO_ENABLED = (Boolean) informationRoot
+				.get("admin_info");
+		Controller.getSettings().USE_ADMIN_NAMES = (Boolean) informationRoot
+				.get("admin_names");
 
 	}
 
