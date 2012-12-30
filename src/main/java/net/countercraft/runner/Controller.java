@@ -55,4 +55,8 @@ public class Controller {
     public static void sendCommandAsConsole(String command){
         getPluginServer().dispatchCommand(getPluginServer().getConsoleSender(), command);
     }
+    
+    public static boolean sendCommandAsConsoleWithResult(String command){
+        return getPluginServer().dispatchCommand(getPluginServer().getConsoleSender(), command);
+    }
 }

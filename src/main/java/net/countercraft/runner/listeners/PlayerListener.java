@@ -1,10 +1,12 @@
 package net.countercraft.runner.listeners;
 
+//Java imports
+import java.util.concurrent.Callable;
+
 //Local Imports
 import net.countercraft.runner.Controller;
 
-//Bukkit Imports
-import org.bukkit.Bukkit;
+//Bukkit imports
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,7 +20,11 @@ public class PlayerListener implements Listener{
     
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) {
-        Controller.getXMPPManager().sendAll("[" + event.getPlayer().getDisplayName() + "] : " + event.getMessage());        
+		if(event.isAsynchronous()) {
+			Controller.getPluginInstance().getServer().getScheduler().callSyncMethod(Controller.getPluginInstance(), new SendMessageSync(event));
+		} else {
+			Controller.getXMPPManager().sendAll("[" + event.getPlayer().getDisplayName() + "] : " + event.getMessage());     
+		}   
     }
 	
 	@EventHandler
@@ -30,4 +36,19 @@ public class PlayerListener implements Listener{
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		Controller.getXMPPManager().sendAll(ChatColor.stripColor(event.getQuitMessage()));
 	}  
+	
+	public class SendMessageSync implements Callable<Object> {
+
+		AsyncPlayerChatEvent event;
+		
+		public SendMessageSync(AsyncPlayerChatEvent event) {
+			this.event = event;
+		}
+		@Override
+		public Object call() throws Exception {
+			Controller.getXMPPManager().sendAll("[" + event.getPlayer().getDisplayName() + "] : " + event.getMessage());     
+			return null;
+		}
+		
+	}
 }
