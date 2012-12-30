@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 //Local Imports
 import net.countercraft.runner.Controller;
+import net.countercraft.runner.util.TimeParser;
 
 //Bukkit Imports
 import org.bukkit.World;
@@ -156,9 +157,9 @@ public class InboundHandler implements MessageListener {
 						if (args.length == 1) {
 							// No world given
 							Controller.getPluginServer().getWorlds().get(0)
-									.setTime(new Long(args[0]));
+									.setTime(TimeParser.parse(args[0]));
 							try {
-								chat.sendMessage("Set time to " + args[0]);
+								chat.sendMessage("Set time to " + TimeParser.format(TimeParser.parse(args[0])));
 							} catch (XMPPException ex) {
 								Logger.getLogger(InboundHandler.class.getName())
 										.log(Level.SEVERE, null, ex);
@@ -177,9 +178,9 @@ public class InboundHandler implements MessageListener {
 											.log(Level.SEVERE, null, ex);
 								}
 							} else {
-								fetchedWorld.setTime(new Long(args[0]));
+								fetchedWorld.setTime(TimeParser.parse(args[0]));
 								try {
-									chat.sendMessage("Set time to " + args[0]
+									chat.sendMessage("Set time to " + TimeParser.format(TimeParser.parse(args[0]))
 											+ " in " + fetchedWorld.getName());
 								} catch (XMPPException ex) {
 									Logger.getLogger(

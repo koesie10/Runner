@@ -76,6 +76,7 @@ public class Config {
 		dataChain.put("admin_info", adminInfo);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void loadConfig() {
 
 		File config = new File(Controller.getDataFolder(), "config.yml");
@@ -129,6 +130,7 @@ public class Config {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private Map parseFile(File config) {
 		Yaml yaml = new Yaml();
 		Reader reader = null;
