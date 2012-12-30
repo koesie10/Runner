@@ -6,6 +6,7 @@ import net.countercraft.runner.listeners.EntityListener;
 import net.countercraft.runner.listeners.PlayerListener;
 import net.countercraft.runner.listeners.WeatherListener;
 
+@SuppressWarnings("unused")
 public class EventManager {
 	private BlockListener blockListener;
 	private EntityListener entitylistener;

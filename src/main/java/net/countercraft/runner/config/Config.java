@@ -21,6 +21,7 @@ import net.countercraft.runner.Controller;
 //Snakeyaml Imports
 import org.yaml.snakeyaml.Yaml;
 
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class Config {
 	private Map<String, Object> dataChain = new HashMap<String, Object>();
 
@@ -76,7 +77,6 @@ public class Config {
 		dataChain.put("admin_info", adminInfo);
 	}
 
-	@SuppressWarnings("unchecked")
 	public void loadConfig() {
 
 		File config = new File(Controller.getDataFolder(), "config.yml");
@@ -130,7 +130,6 @@ public class Config {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private Map parseFile(File config) {
 		Yaml yaml = new Yaml();
 		Reader reader = null;
