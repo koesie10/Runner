@@ -123,7 +123,7 @@ public class XMPPManager {
 		connectionList.add(chatManager.createChat(name, new InboundHandler()));
 	}
 
-	private void removeFromConnectionList(String participant) {
+	public void removeFromConnectionList(String participant) {
 		for (Chat c : connectionList) {
 			if (c.getParticipant().equalsIgnoreCase(participant)) {
 				connectionList.remove(c);
@@ -140,7 +140,7 @@ public class XMPPManager {
 		return false;
 	}
 
-	private boolean chatExists(Chat chat) {
+	public boolean chatExists(Chat chat) {
 		for (Chat c : connectionList) {
 			if (correctAdress(c.getParticipant()).equalsIgnoreCase(
 					correctAdress(chat.getParticipant()))) {

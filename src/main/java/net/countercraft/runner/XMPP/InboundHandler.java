@@ -159,7 +159,9 @@ public class InboundHandler implements MessageListener {
 							Controller.getPluginServer().getWorlds().get(0)
 									.setTime(TimeParser.parse(args[0]));
 							try {
-								chat.sendMessage("Set time to " + TimeParser.format(TimeParser.parse(args[0])));
+								chat.sendMessage("Set time to "
+										+ TimeParser.format(TimeParser
+												.parse(args[0])));
 							} catch (XMPPException ex) {
 								Logger.getLogger(InboundHandler.class.getName())
 										.log(Level.SEVERE, null, ex);
@@ -180,8 +182,10 @@ public class InboundHandler implements MessageListener {
 							} else {
 								fetchedWorld.setTime(TimeParser.parse(args[0]));
 								try {
-									chat.sendMessage("Set time to " + TimeParser.format(TimeParser.parse(args[0]))
-											+ " in " + fetchedWorld.getName());
+									chat.sendMessage("Set time to "
+											+ TimeParser.format(TimeParser
+													.parse(args[0])) + " in "
+											+ fetchedWorld.getName());
 								} catch (XMPPException ex) {
 									Logger.getLogger(
 											InboundHandler.class.getName())
@@ -204,6 +208,15 @@ public class InboundHandler implements MessageListener {
 						Logger.getLogger(InboundHandler.class.getName()).log(
 								Level.SEVERE, null, ex);
 					}
+				} else if (command.equalsIgnoreCase("leave")) {
+					try {
+						chat.sendMessage("You have left the chatroom");
+					} catch (Exception ex) {
+						Logger.getLogger(InboundHandler.class.getName()).log(
+								Level.SEVERE, null, ex);
+					}
+					Controller.getXMPPManager().removeFromConnectionList(
+							chat.getParticipant());
 				} else {
 					// else execute normally
 					try {
