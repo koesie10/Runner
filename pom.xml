@@ -94,7 +94,6 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
-						    <finalName>${project.artifactId}</finalName>
 							<artifactSet>
 								<includes>
 									<include>jivesoftware:*</include>
