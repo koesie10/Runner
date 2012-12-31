@@ -61,7 +61,10 @@ public class InboundHandler implements MessageListener {
 										.setStorm(true);
 								try {
 									chat.sendMessage("Weather was set to storm");
-									System.out.println("Weather was set to storm");
+									System.out
+											.println(Controller.getSettings().ADMIN_LIST
+													.get(chat.getParticipant())
+													+ ": Set weather to storm");
 								} catch (XMPPException ex) {
 									Logger.getLogger(
 											InboundHandler.class.getName())
@@ -86,10 +89,11 @@ public class InboundHandler implements MessageListener {
 									try {
 										chat.sendMessage("Weather was set to storm in world "
 												+ fetchedWorld.getName());
-										System.out
-										.println("Weather was set to storm in world "
-												+ fetchedWorld
-														.getName());
+										System.out.println(Controller
+												.getSettings().ADMIN_LIST
+												.get(chat.getParticipant())
+												+ ": Set weather to storm in "
+												+ fetchedWorld.getName());
 									} catch (XMPPException ex) {
 										Logger.getLogger(
 												InboundHandler.class.getName())
@@ -106,7 +110,10 @@ public class InboundHandler implements MessageListener {
 										.setStorm(false);
 								try {
 									chat.sendMessage("Weather was set to sun");
-									System.out.println("Weather was set to sun");
+									System.out
+											.println(Controller.getSettings().ADMIN_LIST
+													.get(chat.getParticipant())
+													+ ": Set weather to sun");
 								} catch (XMPPException ex) {
 									Logger.getLogger(
 											InboundHandler.class.getName())
@@ -131,10 +138,11 @@ public class InboundHandler implements MessageListener {
 									try {
 										chat.sendMessage("Weather was set to sun in world "
 												+ fetchedWorld.getName());
-										System.out
-												.println("Weather was set to sun in world "
-														+ fetchedWorld
-																.getName());
+										System.out.println(Controller
+												.getSettings().ADMIN_LIST
+												.get(chat.getParticipant())
+												+ ": Set weather to sun in"
+												+ fetchedWorld.getName());
 									} catch (XMPPException ex) {
 										Logger.getLogger(
 												InboundHandler.class.getName())

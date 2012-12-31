@@ -51,7 +51,7 @@ public class Settings {
 	}
 
 	// Command Syntax
-	public String WEATHER_SYNTAX_EXAMPLE = "!weather [storm]/[sun] {world name}";
-	public String TIME_SYNTAX_EXAMPLE = "!time [1000] {world name}";
+	public String WEATHER_SYNTAX_EXAMPLE = "!weather [storm/sun] {world name}";
+	public String TIME_SYNTAX_EXAMPLE = "!time [1000/sun/midnight/noon/12500t/2342] {world name}";
 
 }
