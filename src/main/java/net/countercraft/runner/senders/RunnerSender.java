@@ -9,12 +9,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 
-public class RunnerSender implements CommandSender {
+public class RunnerSender extends ConsoleCommandSender implements CommandSender {
 	
 	private String participant;
 	private String nickname;
