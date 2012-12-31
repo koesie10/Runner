@@ -61,6 +61,7 @@ public class InboundHandler implements MessageListener {
 										.setStorm(true);
 								try {
 									chat.sendMessage("Weather was set to storm");
+									System.out.println("Weather was set to storm");
 								} catch (XMPPException ex) {
 									Logger.getLogger(
 											InboundHandler.class.getName())
@@ -85,6 +86,10 @@ public class InboundHandler implements MessageListener {
 									try {
 										chat.sendMessage("Weather was set to storm in world "
 												+ fetchedWorld.getName());
+										System.out
+										.println("Weather was set to storm in world "
+												+ fetchedWorld
+														.getName());
 									} catch (XMPPException ex) {
 										Logger.getLogger(
 												InboundHandler.class.getName())
@@ -101,6 +106,7 @@ public class InboundHandler implements MessageListener {
 										.setStorm(false);
 								try {
 									chat.sendMessage("Weather was set to sun");
+									System.out.println("Weather was set to sun");
 								} catch (XMPPException ex) {
 									Logger.getLogger(
 											InboundHandler.class.getName())
@@ -125,6 +131,10 @@ public class InboundHandler implements MessageListener {
 									try {
 										chat.sendMessage("Weather was set to sun in world "
 												+ fetchedWorld.getName());
+										System.out
+												.println("Weather was set to sun in world "
+														+ fetchedWorld
+																.getName());
 									} catch (XMPPException ex) {
 										Logger.getLogger(
 												InboundHandler.class.getName())
@@ -148,7 +158,7 @@ public class InboundHandler implements MessageListener {
 					// if time
 					if (args.length < 1) {
 						try {
-							chat.sendMessage("Sorry but your synatx was incorrect. It should be "
+							chat.sendMessage("Sorry but your syntax was incorrect. It should be "
 									+ Controller.getSettings().TIME_SYNTAX_EXAMPLE);
 						} catch (XMPPException ex) {
 							Logger.getLogger(InboundHandler.class.getName())
@@ -164,6 +174,12 @@ public class InboundHandler implements MessageListener {
 								chat.sendMessage("Set time to "
 										+ TimeParser.format(TimeParser
 												.parse(args[0])));
+								System.out
+										.println(Controller.getSettings().ADMIN_LIST
+												.get(chat.getParticipant())
+												+ ": Set time to "
+												+ TimeParser.formatTicks(TimeParser
+														.parse(args[0])));
 							} catch (XMPPException ex) {
 								Logger.getLogger(InboundHandler.class.getName())
 										.log(Level.SEVERE, null, ex);
@@ -188,6 +204,15 @@ public class InboundHandler implements MessageListener {
 											+ TimeParser.format(TimeParser
 													.parse(args[0])) + " in "
 											+ fetchedWorld.getName());
+									System.out
+											.println(Controller.getSettings().ADMIN_LIST
+													.get(chat.getParticipant())
+													+ ": Set time to "
+													+ TimeParser
+															.formatTicks(TimeParser
+																	.parse(args[0]))
+													+ " in "
+													+ fetchedWorld.getName());
 								} catch (XMPPException ex) {
 									Logger.getLogger(
 											InboundHandler.class.getName())
@@ -254,7 +279,8 @@ public class InboundHandler implements MessageListener {
 			Controller.getXMPPManager().removeFromConnectionList(
 					chat.getParticipant());
 		} else {
-			if (Controller.getSettings().ADMIN_LIST.containsKey(chat.getParticipant())) {
+			if (Controller.getSettings().ADMIN_LIST.containsKey(chat
+					.getParticipant())) {
 				Controller.getPluginServer().broadcastMessage(
 						"[Runner Internet Chat] "
 								+ Controller.getSettings().ADMIN_LIST
@@ -267,11 +293,13 @@ public class InboundHandler implements MessageListener {
 						.sendAllExcept(
 								"[Internet Chat] "
 										+ Controller.getSettings().ADMIN_LIST.get(Controller
-												.getXMPPManager().correctAdress(
+												.getXMPPManager()
+												.correctAdress(
 														chat.getParticipant()))
 										+ " : " + messageBody,
 								chat.getParticipant());
-			} else if (Controller.getSettings().USER_LIST.containsKey(chat.getParticipant())) {
+			} else if (Controller.getSettings().USER_LIST.containsKey(chat
+					.getParticipant())) {
 				Controller.getPluginServer().broadcastMessage(
 						"[Runner Internet Chat] "
 								+ Controller.getSettings().USER_LIST
@@ -284,26 +312,22 @@ public class InboundHandler implements MessageListener {
 						.sendAllExcept(
 								"[Internet Chat] "
 										+ Controller.getSettings().USER_LIST.get(Controller
-												.getXMPPManager().correctAdress(
+												.getXMPPManager()
+												.correctAdress(
 														chat.getParticipant()))
 										+ " : " + messageBody,
 								chat.getParticipant());
 			} else {
 				Controller.getPluginServer().broadcastMessage(
 						"[Runner Internet Chat] "
-								+ Controller.getXMPPManager()
-												.correctAdress(
-														chat.getParticipant())
-								+ " : " + messageBody);
-				Controller
-						.getXMPPManager()
-						.sendAllExcept(
-								"[Internet Chat] "
-										+ Controller
-												.getXMPPManager().correctAdress(
-														chat.getParticipant())
-										+ " : " + messageBody,
-								chat.getParticipant());
+								+ Controller.getXMPPManager().correctAdress(
+										chat.getParticipant()) + " : "
+								+ messageBody);
+				Controller.getXMPPManager().sendAllExcept(
+						"[Internet Chat] "
+								+ Controller.getXMPPManager().correctAdress(
+										chat.getParticipant()) + " : "
+								+ messageBody, chat.getParticipant());
 			}
 
 		}
