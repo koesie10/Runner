@@ -12,7 +12,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<craftbukkitVersion>1.4.6-R0.3-SNAPSHOT</craftbukkitVersion>
+		<bukkitVersion>1.4.6-R0.4-SNAPSHOT</bukkitVersion>
 	</properties>
 
 	<!-- Source code -->
@@ -25,12 +25,8 @@
 	<!-- Repository locations -->
 	<repositories>
 		<repository>
-			<id>spout-repo</id>
-			<url>http://repo.spout.org</url>
-		</repository>
-		<repository>
-			<id>vault-repo</id>
-			<url>http://ci.herocraftonline.com/plugin/repository/everything</url>
+			<id>bukkit-repo</id>
+			<url>http://repo.bukkit.org/content/groups/public/</url>
 		</repository>
 	</repositories>
 
@@ -38,14 +34,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.bukkit</groupId>
-			<artifactId>craftbukkit</artifactId>
-			<version>${craftbukkitVersion}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.milkbowl.vault</groupId>
-			<artifactId>Vault</artifactId>
-			<version>1.2.23-SNAPSHOT</version>
+			<artifactId>bukkit</artifactId>
+			<version>${bukkitVersion}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -119,7 +109,7 @@
 				<version>1.2</version>
 				<executions>
 					<execution>
-					    <phase>package</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>enforce</goal>
 						</goals>

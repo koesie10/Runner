@@ -7,8 +7,8 @@ import net.countercraft.runner.Controller;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
-import org.bukkit.World;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
@@ -71,16 +71,22 @@ public class RunnerSender implements CommandSender {
 
 	@Override
 	public boolean hasPermission(String arg0) {
-		if (this.use_nick && Controller.isVaultInstalled()) {
-			return Controller.getPermission().playerHas((World)null, this.nickname.toString(), arg0);
+		if (this.use_nick) {
+			//return Controller.getPermission().playerHas((World)null, this.nickname.toString(), arg0);
+			//return .hasPermission(arg0);
+			Player p = Bukkit.getServer().getPlayerExact(this.nickname.toString());
+			if (p != null)  {
+				return p.hasPermission(arg0);
+			}
 		}
 		return true;
 	}
 
 	@Override
 	public boolean hasPermission(Permission arg0) {
-		if (this.use_nick && Controller.isVaultInstalled()) {
-			return Controller.getPermission().playerHas((World)null, this.nickname.toString(), arg0.getName());
+		if (this.use_nick) {
+			//return Controller.getPermission().playerHas((World)null, this.nickname.toString(), arg0.getName());
+			return Bukkit.getServer().getPlayerExact(this.nickname.toString()).hasPermission(arg0);
 		}
 		return true;
 	}

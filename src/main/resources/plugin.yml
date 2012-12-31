@@ -6,7 +6,6 @@ database: false
 description: ${project.description}
 startup: postworld
 url: ${project.url}
-softdepend: [Vault]
 commands:
   reloadrunner:
     description: Reload Runner configuration file from disk
