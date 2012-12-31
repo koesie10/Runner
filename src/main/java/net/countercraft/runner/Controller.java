@@ -60,4 +60,8 @@ public class Controller {
 		return getPluginServer().dispatchCommand(
 				getPluginServer().getConsoleSender(), command);
 	}
+	
+	public static String getName() {
+		return Runner.getPluginName();
+	}
 }

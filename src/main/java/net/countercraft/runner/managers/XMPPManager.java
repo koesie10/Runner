@@ -54,7 +54,7 @@ public class XMPPManager {
 
 				createAndAddToChat(name.toString());
 				chat(name.toString()).sendMessage(
-						"Runner has activated on server : "
+						Controller.getName() + " has activated on server : "
 								+ Controller.getPluginInstance().getServer()
 										.getServerName());
 
@@ -63,7 +63,7 @@ public class XMPPManager {
 			for (Object name : Controller.getSettings().USER_LIST.keySet().toArray()) {
 				createAndAddToChat(name.toString());
 				chat(name.toString()).sendMessage(
-						"Runner has activated on server : "
+						Controller.getName() + " has activated on server : "
 								+ Controller.getPluginInstance().getServer()
 										.getServerName());
 			}
@@ -220,11 +220,11 @@ public class XMPPManager {
 	public void close() throws XMPPException {
 		for (Object name : Controller.getSettings().ADMIN_LIST.keySet().toArray()) {
 			chat(name.toString())
-					.sendMessage("Runner remote console is now closing down.");
+					.sendMessage(Controller.getName() + " remote console is now closing down.");
 		}
 
 		for (Object name : Controller.getSettings().USER_LIST.keySet().toArray()) {
-			chat(name.toString()).sendMessage("Runner remote chat is now closing down.");
+			chat(name.toString()).sendMessage(Controller.getName() + " remote chat is now closing down.");
 		}
 
 		connection.disconnect();

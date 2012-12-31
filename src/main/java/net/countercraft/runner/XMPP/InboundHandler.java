@@ -290,7 +290,7 @@ public class InboundHandler implements MessageListener {
 			if (Controller.getSettings().ADMIN_LIST.containsKey(chat
 					.getParticipant())) {
 				Controller.getPluginServer().broadcastMessage(
-						"[Runner Internet Chat] "
+						"[ " + Controller.getName() + " Internet Chat] "
 								+ Controller.getSettings().ADMIN_LIST
 										.get(Controller.getXMPPManager()
 												.correctAdress(
@@ -309,7 +309,7 @@ public class InboundHandler implements MessageListener {
 			} else if (Controller.getSettings().USER_LIST.containsKey(chat
 					.getParticipant())) {
 				Controller.getPluginServer().broadcastMessage(
-						"[Runner Internet Chat] "
+						"[ " + Controller.getName() + " Internet Chat] "
 								+ Controller.getSettings().USER_LIST
 										.get(Controller.getXMPPManager()
 												.correctAdress(
@@ -327,7 +327,7 @@ public class InboundHandler implements MessageListener {
 								chat.getParticipant());
 			} else {
 				Controller.getPluginServer().broadcastMessage(
-						"[Runner Internet Chat] "
+						"[ " + Controller.getName() + " Internet Chat] "
 								+ Controller.getXMPPManager().correctAdress(
 										chat.getParticipant()) + " : "
 								+ messageBody);

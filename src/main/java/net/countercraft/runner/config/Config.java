@@ -86,7 +86,7 @@ public class Config {
 			informationRoot = dataChain;
 			System.out
 					.println("["
-							+ Controller.getPluginInstance().toString()
+							+ Controller.getName()
 							+ "] You can now change the config file and execute /reloadrunner when finished.");
 		} else {
 			informationRoot = parseFile(config);

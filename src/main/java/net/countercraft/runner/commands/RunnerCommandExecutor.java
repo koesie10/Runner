@@ -13,7 +13,7 @@ public class RunnerCommandExecutor implements CommandExecutor {
  
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		Controller.getXMPPManager().sendAll("Runner will be reloaded");
+		Controller.getXMPPManager().sendAll(Controller.getName() + " will be reloaded");
 		File pluginDirectory = Controller.getDataFolder();
 
 		// Config Setup
@@ -23,7 +23,7 @@ public class RunnerCommandExecutor implements CommandExecutor {
 		
 		Controller.getXMPPManager().connect();
 		
-		sender.sendMessage(ChatColor.GOLD + "Reloaded Runner");
+		sender.sendMessage(ChatColor.GOLD + "Reloaded " + Controller.getName());
 		return true;
 	}
 	

@@ -34,7 +34,7 @@ public class Runner extends JavaPlugin {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("[" + this.toString() + "] is now disabled!");
+		System.out.println("[" + Controller.getName() + "] is now disabled!");
 	}
 
 	public void onEnable() {
@@ -55,7 +55,7 @@ public class Runner extends JavaPlugin {
 		
 		getCommand("reloadrunner").setExecutor(new RunnerCommandExecutor());
 		
-		System.out.println("[" + this.toString() + "] is now enabled.");
+		System.out.println("[" + Controller.getName() + "] is now enabled.");
 
 	}
 
@@ -63,9 +63,8 @@ public class Runner extends JavaPlugin {
 		return this.getDescription().getVersion();
 	}
 	
-	@Override
-	public String toString() {
-		return this.getDescription().getName();
+	public static String getPluginName() {
+		return plugin.getDescription().getName();
 	}
 
 }
