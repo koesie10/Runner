@@ -15,7 +15,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 
-public class RunnerSender extends ConsoleCommandSender {
+public class RunnerSender implements  ConsoleCommandSender {
 	
 	private String participant;
 	private String nickname;
