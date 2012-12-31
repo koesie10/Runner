@@ -8,7 +8,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
@@ -17,14 +16,13 @@ import org.bukkit.plugin.Plugin;
 public class RunnerSender implements CommandSender {
 
 	private String participant;
-	private String nickname;
-	private boolean use_nick;
+	private String nick;
 
-	public RunnerSender(String participant, String nickname, boolean use_nick) {
+	public RunnerSender(String participant, String nick) {
 		this.participant = participant;
-		this.nickname = nickname;
-		this.use_nick = use_nick;
+		this.nick = nick;
 	}
+	
 	@Override
 	public void sendMessage(String arg0) {
 		Controller.getXMPPManager().sendToOne(ChatColor.stripColor(arg0), participant);
@@ -71,23 +69,11 @@ public class RunnerSender implements CommandSender {
 
 	@Override
 	public boolean hasPermission(String arg0) {
-		if (this.use_nick) {
-			//return Controller.getPermission().playerHas((World)null, this.nickname.toString(), arg0);
-			//return .hasPermission(arg0);
-			Player p = Bukkit.getServer().getPlayerExact(this.nickname.toString());
-			if (p != null)  {
-				return p.hasPermission(arg0);
-			}
-		}
 		return true;
 	}
 
 	@Override
 	public boolean hasPermission(Permission arg0) {
-		if (this.use_nick) {
-			//return Controller.getPermission().playerHas((World)null, this.nickname.toString(), arg0.getName());
-			return Bukkit.getServer().getPlayerExact(this.nickname.toString()).hasPermission(arg0);
-		}
 		return true;
 	}
 
@@ -125,7 +111,7 @@ public class RunnerSender implements CommandSender {
 
 	@Override
 	public String getName() {
-		return this.participant;
+		return this.nick;
 	}
 
 	@Override

@@ -73,9 +73,6 @@ public class Config {
 		// Admin Transmissions
 		boolean adminInfo = false;
 		dataChain.put("admin_info", adminInfo);
-
-		boolean useAdminNames = false;
-		dataChain.put("admin_names", useAdminNames);
 	}
 
 	public void loadConfig() {
@@ -107,9 +104,6 @@ public class Config {
 				.get("users");
 		Controller.getSettings().ADMIN_INFO_ENABLED = (Boolean) informationRoot
 				.get("admin_info");
-		Controller.getSettings().USE_ADMIN_NAMES = (Boolean) informationRoot
-				.get("admin_names");
-
 	}
 
 	private void createConfig(File config) {

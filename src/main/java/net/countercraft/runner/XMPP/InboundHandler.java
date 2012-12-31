@@ -225,8 +225,7 @@ public class InboundHandler implements MessageListener {
 						CommandSender sender = new RunnerSender(
 								chat.getParticipant(),
 								Controller.getSettings().ADMIN_LIST.get(chat
-										.getParticipant()),
-								Controller.getSettings().USE_ADMIN_NAMES);
+										.getParticipant()));
 						chat.sendMessage((Controller.getPluginServer()
 								.dispatchCommand(sender, commandAll)) ? ""
 								: "Command was not found");

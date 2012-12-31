@@ -14,7 +14,6 @@ public class Settings {
 	public HashMap<String, String> USER_LIST;
 	private HashMap<String, String> ADMIN_WORLD_LIST;
 	public boolean ADMIN_INFO_ENABLED;
-	public boolean USE_ADMIN_NAMES;
 
 	private Settings() {
 	}
