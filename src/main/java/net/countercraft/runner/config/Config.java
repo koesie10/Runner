@@ -110,6 +110,9 @@ public class Config {
 				.get("admin_info");
 		Controller.getSettings().CHAT_PREFIX = (String) informationRoot
 				.get("prefix");
+		if (Controller.getSettings().CHAT_PREFIX == null || Controller.getSettings().CHAT_PREFIX == "") {
+			Controller.getSettings().CHAT_PREFIX = "[ Runner Internet Chat ]";
+		}
 	}
 
 	private void createConfig(File config) {
