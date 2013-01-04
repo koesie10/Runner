@@ -30,8 +30,8 @@ public class PlayerListener implements Listener {
 							new SendMessageSync(event));
 		} else {
 			Controller.getXMPPManager().sendAll(
-					"[" + event.getPlayer().getDisplayName() + "] : "
-							+ event.getMessage());
+					"[" + ChatColor.stripColor(event.getPlayer().getDisplayName()) + "] : "
+							+ ChatColor.stripColor(event.getMessage()));
 		}
 	}
 
@@ -58,8 +58,8 @@ public class PlayerListener implements Listener {
 		@Override
 		public Object call() throws Exception {
 			Controller.getXMPPManager().sendAll(
-					"[" + event.getPlayer().getDisplayName() + "] : "
-							+ event.getMessage());
+					"[" + ChatColor.stripColor(event.getPlayer().getDisplayName()) + "] : "
+							+ ChatColor.stripColor(event.getMessage()));
 			return null;
 		}
 
