@@ -73,6 +73,10 @@ public class Config {
 		// Admin Transmissions
 		boolean adminInfo = false;
 		dataChain.put("admin_info", adminInfo);
+
+		// Prefix
+		String chat_prefix = "[ Runner Internet Chat ]";
+		dataChain.put("prefix", chat_prefix);
 	}
 
 	public void loadConfig() {
@@ -80,7 +84,7 @@ public class Config {
 		File config = new File(Controller.getDataFolder(), "config.yml");
 		boolean exists = Controller.getFileManager().makeIfNotExistFile(config);
 		Map informationRoot;
-		
+
 		if (!exists) {
 			createConfig(config);
 			informationRoot = dataChain;
@@ -91,7 +95,7 @@ public class Config {
 		} else {
 			informationRoot = parseFile(config);
 		}
-		
+
 		Controller.getSettings().USERNAME = (String) informationRoot
 				.get("username");
 		Controller.getSettings().PASSWORD = (String) informationRoot
@@ -104,6 +108,8 @@ public class Config {
 				.get("users");
 		Controller.getSettings().ADMIN_INFO_ENABLED = (Boolean) informationRoot
 				.get("admin_info");
+		Controller.getSettings().CHAT_PREFIX = (String) informationRoot
+				.get("prefix");
 	}
 
 	private void createConfig(File config) {

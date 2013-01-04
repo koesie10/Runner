@@ -290,7 +290,8 @@ public class InboundHandler implements MessageListener {
 			if (Controller.getSettings().ADMIN_LIST.containsKey(chat
 					.getParticipant())) {
 				Controller.getPluginServer().broadcastMessage(
-						"[ " + Controller.getName() + " Internet Chat] "
+						Controller.getSettings().CHAT_PREFIX
+								+ " "
 								+ Controller.getSettings().ADMIN_LIST
 										.get(Controller.getXMPPManager()
 												.correctAdress(
@@ -299,7 +300,8 @@ public class InboundHandler implements MessageListener {
 				Controller
 						.getXMPPManager()
 						.sendAllExcept(
-								"[Internet Chat] "
+								Controller.getSettings().CHAT_PREFIX
+										+ " "
 										+ Controller.getSettings().ADMIN_LIST.get(Controller
 												.getXMPPManager()
 												.correctAdress(
@@ -309,7 +311,8 @@ public class InboundHandler implements MessageListener {
 			} else if (Controller.getSettings().USER_LIST.containsKey(chat
 					.getParticipant())) {
 				Controller.getPluginServer().broadcastMessage(
-						"[ " + Controller.getName() + " Internet Chat] "
+						Controller.getSettings().CHAT_PREFIX
+								+ " "
 								+ Controller.getSettings().USER_LIST
 										.get(Controller.getXMPPManager()
 												.correctAdress(
@@ -318,7 +321,8 @@ public class InboundHandler implements MessageListener {
 				Controller
 						.getXMPPManager()
 						.sendAllExcept(
-								"[Internet Chat] "
+								Controller.getSettings().CHAT_PREFIX
+										+ " "
 										+ Controller.getSettings().USER_LIST.get(Controller
 												.getXMPPManager()
 												.correctAdress(
@@ -327,12 +331,14 @@ public class InboundHandler implements MessageListener {
 								chat.getParticipant());
 			} else {
 				Controller.getPluginServer().broadcastMessage(
-						"[ " + Controller.getName() + " Internet Chat] "
+						Controller.getSettings().CHAT_PREFIX
+								+ " "
 								+ Controller.getXMPPManager().correctAdress(
 										chat.getParticipant()) + " : "
 								+ messageBody);
 				Controller.getXMPPManager().sendAllExcept(
-						"[Internet Chat] "
+						Controller.getSettings().CHAT_PREFIX
+								+ " "
 								+ Controller.getXMPPManager().correctAdress(
 										chat.getParticipant()) + " : "
 								+ messageBody, chat.getParticipant());
